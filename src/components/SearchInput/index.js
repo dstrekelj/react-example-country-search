@@ -8,7 +8,7 @@ const defaultProps = {
     onChange: () => {},
 }
 
-const handleOnChange = handler => event => handler(event.value)
+const handleOnChange = handler => event => handler(event.target.value)
 
 function SearchInput(props) {
     return (

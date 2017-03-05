@@ -14,7 +14,7 @@ const createAxiosClient = timeout => {
 }
 
 const createApi = baseUrl => client => ({
-    getAllCountries: client.get(`${baseUrl}/all`),
+    getAllCountries: () => client.get(`${baseUrl}/all`),
 })
 
 const axiosClient = createAxiosClient(1000)

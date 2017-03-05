@@ -10,7 +10,7 @@ import 'styles/_all.scss'
 const propTypes = {
     actions: PropTypes.shape({
         onRequestCountries: PropTypes.func,
-        onChangeSearchQuery: PropTypes.func,
+        onUpdateSearchQuery: PropTypes.func,
     }),
     model: PropTypes.shape({
         countries: PropTypes.arrayOf(
@@ -20,17 +20,19 @@ const propTypes = {
             }),
         ),
         requestCountriesState: PropTypes.string,
+        searchQuery: PropTypes.string,
     }),
 }
 
 const defaultProps = {
     actions: {
         onRequestCountries: () => {},
-        onChangeSearchQuery: () => {},
+        onUpdateSearchQuery: () => {},
     },
     model: {
         countries: [],
         requestCountriesState: ENUM_REQUEST_STATE.SUCCESS,
+        searchQuery: '',
     }
 }
 
@@ -45,7 +47,7 @@ class App extends React.Component {
     }
 
     handleSearchInputChange(value) {
-        this.props.actions.onChangeSearchQuery(value)
+        this.props.actions.onUpdateSearchQuery(value)
     }
 
     render() {
@@ -61,12 +63,21 @@ class App extends React.Component {
             message = 'No data.'
         }
 
+        let countries = model.countries
+
+        if (model.searchQuery !== '') {
+            const regex = new RegExp(model.searchQuery, 'gi')
+            countries = countries.filter(e => regex.test(e.name))
+        }
+
         return (
             <div className="App__wrapper">
                 <h1>Country Search</h1>
                 {message !== undefined && <MessageOverlay>{message}</MessageOverlay>}
-                <SearchInput onChange={this.onSearchInputChange} />
-                <CountryList items={model.countries} />
+                <SearchInput
+                    onChange={this.handleSearchInputChange}
+                />
+                <CountryList items={countries} />
             </div>
         )
     }

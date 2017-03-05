@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "webpack": "webpack --config config/webpack.config.js",
+    "webpack:watch": "webpack --config config/webpack.config.js -w",
     "serve": "webpack-dev-server",
     "getstorybook": "getstorybook",
     "storybook": "start-storybook -p 6006",
@@ -36,6 +37,7 @@
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-redux": "^5.0.3",
-    "redux": "^3.6.0"
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.2.0"
   }
 }
