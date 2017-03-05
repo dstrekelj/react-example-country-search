@@ -9,30 +9,50 @@ storiesOf('App', module)
         <App />
     ))
     .add('with countries request pending', () => (
-        <App model={{
+        <App
+            model={{
                 countries: [],
                 requestCountriesState: ENUM_REQUEST_STATE.PENDING,
+            }}
+            actions={{
+                onRequestCountries: action('onRequestCountries'),
+                onUpdateSearchQuery: action('onUpdateSearchQuery'),
             }}
         />
     ))
     .add('with countries request success (no data)', () => (
-        <App model={{
+        <App
+            model={{
                 countries: [],
                 requestCountriesState: ENUM_REQUEST_STATE.SUCCESS,
+            }}
+            actions={{
+                onRequestCountries: action('onRequestCountries'),
+                onUpdateSearchQuery: action('onUpdateSearchQuery'),
             }}
         />
     ))
     .add('with countries request success (with data)', () => (
-        <App model={{
+        <App
+            model={{
                 countries: Array(20).fill(0).map(e => ({ name: 'Croatia', capital: 'Zagreb', })),
                 requestCountriesState: ENUM_REQUEST_STATE.SUCCESS,
+            }}
+            actions={{
+                onRequestCountries: action('onRequestCountries'),
+                onUpdateSearchQuery: action('onUpdateSearchQuery'),
             }}
         />
     ))
     .add('with countries request failure', () => (
-        <App model={{
+        <App
+            model={{
                 countries: [],
                 requestCountriesState: ENUM_REQUEST_STATE.FAILURE,
+            }}
+            actions={{
+                onRequestCountries: action('onRequestCountries'),
+                onUpdateSearchQuery: action('onUpdateSearchQuery'),
             }}
         />
     ))
