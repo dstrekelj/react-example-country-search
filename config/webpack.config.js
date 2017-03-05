@@ -1,6 +1,8 @@
 var path = require('path')
 var webpack = require('webpack')
 
+var HtmlWebpackPlugin = require('html-webpack-plugin')
+
 var DIR_DIST = 'dist'
 var DIR_SRC = 'src'
 
@@ -53,4 +55,9 @@ module.exports = {
       }
     ],
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'Country Search',
+    }),
+  ]
 }

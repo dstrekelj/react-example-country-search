@@ -12,9 +12,12 @@ const store = createStore(
     applyMiddleware(thunk)
 )
 
+const container = document.createElement('div')
+document.body.appendChild(container)
+
 render(
     <Provider store={store}>
         <App />
     </Provider>,
-    document.getElementById('root')
+    container
 )
