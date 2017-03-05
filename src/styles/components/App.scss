@@ -1,0 +1,21 @@
+.App {
+}
+
+.App__wrapper {
+    width: 640px;
+    margin: auto;
+    margin-top: 2em;
+    margin-bottom: 2em;
+
+    &>.CountryList {
+        margin-top: 2em;
+    }
+
+    &>h1 {
+        color: $color-white;
+        font-size: 4rem;
+        text-align: center;
+        text-shadow: 0.5rem 0.5rem 0 rgba(0, 0, 0, 0.1);
+        margin: 4rem 0;
+    }
+}

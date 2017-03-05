@@ -16,7 +16,15 @@ module.exports = {
   ],
   module: {
     loaders: [
-      // add your custom loaders.
+      {
+        test: /\.s(a|c)ss$/,
+        loaders: [
+          'style-loader',
+          'css-loader?importLoaders=2',
+          'resolve-url-loader?root=' + path.join('.', DIR_SRC),
+          'sass-loader?sourceMap',
+        ]
+      }
     ],
   },
   resolve: {

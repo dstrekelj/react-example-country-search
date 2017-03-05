@@ -13,7 +13,7 @@ const defaultProps = {
 function CountryItem({ capital, name }) {
     return (
         <article className="CountryItem">
-            <p>{name} (Capital: {capital})</p>
+            <p>{name}</p>
         </article>
     )
 }

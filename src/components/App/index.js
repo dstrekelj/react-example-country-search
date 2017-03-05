@@ -1,11 +1,16 @@
 import React, { PropTypes } from 'react'
 
 import CountryList from 'components/CountryList'
+import MessageOverlay from 'components/MessageOverlay'
+import SearchInput from 'components/SearchInput'
 import { ENUM_REQUEST_STATE, requestStateUtil } from 'utils/Resources'
+
+import 'styles/_all.scss'
 
 const propTypes = {
     actions: PropTypes.shape({
-        handleRequestCountries: PropTypes.func,
+        onRequestCountries: PropTypes.func,
+        onChangeSearchQuery: PropTypes.func,
     }),
     model: PropTypes.shape({
         countries: PropTypes.arrayOf(
@@ -20,7 +25,8 @@ const propTypes = {
 
 const defaultProps = {
     actions: {
-        handleRequestCountries: () => {},
+        onRequestCountries: () => {},
+        onChangeSearchQuery: () => {},
     },
     model: {
         countries: [],
@@ -29,25 +35,44 @@ const defaultProps = {
 }
 
 class App extends React.Component {
+    constructor(props) {
+        super(props)
+
+        this.handleSearchInputChange = this.handleSearchInputChange.bind(this)
+    }
     componentDidMount() {
-        this.props.handleRequestCountries()
+        this.props.actions.onRequestCountries()
+    }
+
+    handleSearchInputChange(value) {
+        this.props.actions.onChangeSearchQuery(value)
     }
 
     render() {
         const { model } = this.props
 
-        if (requestStateUtil.isFailure(model.requestCountriesState)) {
-            <p>An error has occured.</p>
-        }
+        let message = undefined
 
-        if (requestStateUtil.isPending(model.requestCountriesState)) {
-            <p>Loading...</p>
+        if (requestStateUtil.isFailure(model.requestCountriesState)) {
+            message = 'An error has occured.'
+        } else if (requestStateUtil.isPending(model.requestCountriesState)) {
+            message = 'Loading...'
+        } else if (model.countries.length === 0) {
+            message = 'No data.'
         }
 
         return (
-            <CountryList items={model.countries} />
+            <div className="App__wrapper">
+                <h1>Country Search</h1>
+                {message !== undefined && <MessageOverlay>{message}</MessageOverlay>}
+                <SearchInput onChange={this.onSearchInputChange} />
+                <CountryList items={model.countries} />
+            </div>
         )
     }
 }
+
+App.propTypes = propTypes
+App.defaultProps = defaultProps
 
 export default App

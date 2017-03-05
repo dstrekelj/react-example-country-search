@@ -1,0 +1,7 @@
+.CountryItem {
+    @include box-shadow-animated;
+    transition: box-shadow $duration-transition;
+    background: $color-white;
+    padding: 2em;
+    border-radius: $border-radius-small;
+}

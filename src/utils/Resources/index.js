@@ -1,5 +1,5 @@
 export const ENUM_REQUEST_STATE = {
-    FAILURE: 'enum_request_state_pending',
+    FAILURE: 'enum_request_state_failure',
     PENDING: 'enum_request_state_pending',
     SUCCESS: 'enum_request_state_success',
 }

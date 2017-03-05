@@ -13,8 +13,9 @@ const defaultProps = {
 function CountryList({ items }) {
     return (
         <section className="CountryList">
-            {items.length === 0 && <p>No data.</p>}
-            {items.map(e => <CountryItem {...e} />)}
+            {items.map((e, i) =>
+                <CountryItem key={`country-item-${i}`} {...e} />
+            )}
         </section>
     )
 }
